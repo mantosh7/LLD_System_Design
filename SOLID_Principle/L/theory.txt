@@ -1,0 +1,13 @@
+🟧 L – Liskov Substitution Principle (LSP)
+👉 Child classes ko parent ki jagah replace kiya ja sake bina system ko break kiye.
+
+❌ Bad example:
+Bird parent class me fly() method ho,
+But Penguin extends Bird but cannot fly → violates LSP.
+
+Solution:
+class Bird {}
+class FlyingBird extends Bird { fly(){} }
+class NonFlyingBird extends Bird {}
+
+➡️ Ab penguin = NonFlyingBird, LSP follow.

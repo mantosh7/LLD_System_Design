@@ -1,0 +1,37 @@
+🟦 Return Type Rule (covariance)
+
+👉 Child class ka method SAME ya MORE SPECIFIC (narrower) return type de sakta hai.
+👉 Less specific (broader) return type nahi de sakta.
+
+
+🟩 Pehle ye samjho: “Specific” / “General” ka matlab kya hota hai?
+
+Hierarchy example:
+Animal
+ ├── Dog
+ └── Cat
+Animal is general (bade level ka type)
+Dog is more specific (chhota/special type)
+
+
+🟧 RULE in 1 line:
+✔ Parent method returns Animal → child method Dog return kar sakta hai.
+❌ Parent method returns Dog → child method Animal return nahi kar sakta.
+
+🟩 Allowed Example (More Specific Return Type)
+Parent: Animal getPet()
+Child: Dog getPet()   // ALLOWED 👍 (Dog is a type of Animal)
+
+Why allowed?
+Because where code expects an Animal, returning a Dog is okay — Dog bhi Animal hi hai.
+
+🟥 Not Allowed Example (More General Return Type)
+Parent: Dog getPet()
+Child: Animal getPet()   // ❌ NOT ALLOWED
+
+Why not allowed?
+Client code expects exact Dog.
+
+Example: Dog d = obj.getPet();
+Agar child keh diya “main Dog nahi, Animal return karunga”,
+to ho sakta hai Animal = Cat ho, aur code crash ho jayega.

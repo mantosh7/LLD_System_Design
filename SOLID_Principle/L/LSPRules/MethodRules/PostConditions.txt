@@ -1,0 +1,26 @@
+🟩 Post-conditions (Output Guarantees)
+Postcondition = function chal kar complete ho gaya, to kya guarantee return karta hai.
+➡️ Matlab output ke rules.
+➡️ Call ke baad kya-kya true hona chahiye.
+
+👉 Child class should not weaken postconditions.
+Parent jo output guarantee deta hai, child ko bhi wahi guarantee maintain karni hogi (ya better).
+
+❌ Bad (violates LSP)
+Parent:
+withdraw(amount)
+Guarantee: balance will reduce EXACT amount.
+
+Child:
+withdraw(amount)
+Balance reduce karta hai amount + extra fee
+
+➡️ Parent ki guarantee break ho gayi.
+Client code expects exact deduction, child surprise behavior deta hai → LSP break.
+
+✔ Good
+Child can keep postconditions same or stronger, but never weaker.
+
+Example stronger (allowed):
+Parent: returns ≥ 0
+Child: returns ≥ 10 (this is stronger guarantee → fine)

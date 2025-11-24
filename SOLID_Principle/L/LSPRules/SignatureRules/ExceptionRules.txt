@@ -1,0 +1,61 @@
+🟥 Exception Rule (Core Idea)
+
+👉 Child method CANNOT throw MORE or BROADER exceptions than parent.
+👉 Child method CAN throw SAME or NARROWER exceptions.
+
+Iska reason:
+Client code parent ka object expect kar raha hota hai.
+Agar child zyada exceptions throw karega → client handle nahi karega → program crash.
+
+🟦 Broad vs Narrow Exception – Simple Explanation
+
+Example hierarchy:
+Exception
+ ├── IOException
+ └── NullPointerException
+     ├── FileNotFoundException (more specific)
+
+=> Exception → most general
+=> IOException → less general
+=> FileNotFoundException → very specific
+
+
+🟩 RULE 1: Child cannot throw BROADER exceptions
+
+❌ Not Allowed:
+Parent: void read() throws IOException
+Child: void read() throws Exception   // BROADER than IOException
+
+Why not allowed?
+Calling code only handles IOException:
+
+try {
+   obj.read();
+} catch(IOException e) { ... }
+If child throws Exception → program crash.
+
+
+🟦 RULE 2: Child cannot introduce NEW exceptions
+
+Parent: void withdraw(double amt)
+Child: void withdraw(double amt) throws IllegalStateException  // NEW exception ❌
+
+Parent didn’t throw anything.
+Child suddenly throws → LSP broke.
+
+
+🟩 RULE 3: Child can throw same exceptions
+Parent: void load() throws IOException
+Child: void load() throws IOException   // Same → OK ✔
+
+
+🟩 RULE 4: Child can throw narrower (more specific) exceptions
+Parent: void read() throws IOException
+Child: void read() throws FileNotFoundException   // More specific → OK ✔
+
+
+🟧 RULE 5: Child must NOT throw more exceptions total
+Parent: void save() throws IOException
+Child: void save() throws IOException, SQLException   // ❌ more exceptions
+
+Extra exception → client broken → LSP violation.

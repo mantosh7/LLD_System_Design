@@ -1,0 +1,24 @@
+🟩 O – Open/Closed Principle (OCP)
+
+👉 Code extension ke liye open, modification ke liye closed hona chahiye.
+Yani new feature add karne ke liye purana code modify mat karo → extend karo.
+
+❌ Bad:
+class PaymentService {
+  pay(type) {
+    if(type == "UPI") ...
+    if(type == "CARD") ...
+    if(type == "COD") ...
+  }
+}
+Har new payment type ke liye code change karna padega.
+
+✅ Good:
+interface Payment {
+    pay();
+}
+
+class UpiPayment implements Payment { ... }
+class CardPayment implements Payment { ... }
+➡️ Bas new class add kar do, old code untouched.
+

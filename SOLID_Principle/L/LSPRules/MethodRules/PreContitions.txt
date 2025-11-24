@@ -1,0 +1,18 @@
+🟩 Pre-conditions (Input Requirements)
+Precondition = function ko chalane se pehle kya-kya conditions true honi chahiye.
+➡️ Matlab input ke rules.
+➡️ Agar yeh follow nahi hue to function sahi se kaam nahi karega.
+
+👉 Child class should NOT strengthen (tighten) preconditions.
+Matlab child method parent se zyada strict nahi hona chahiye.
+
+❌ Bad (violates LSP)
+
+Parent method: withdraw(amount)  // amount >= 1 allowed
+Child method: withdraw(amount)  // amount must be >= 100
+
+➡️ Child ne input requirement ko restrict kar diya.
+Parent object ko replace karoge → code break hoga.
+
+✔ Good
+Child can keep preconditions same or weaker (i.e., accept more inputs), but never stricter.

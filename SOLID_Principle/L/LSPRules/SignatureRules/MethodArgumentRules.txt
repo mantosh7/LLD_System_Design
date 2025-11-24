@@ -1,0 +1,23 @@
+🟦 Method Argument Rules (Parameter Rules)
+
+👉 Child method must accept the SAME or MORE general parameters — NEVER MORE SPECIFIC.
+Isko Contravariance of arguments bolte hain.
+
+✔ Allowed (More general input)
+Parent: void printData(Number n)
+Child: void printData(Object n)   // more general → allowed
+
+Parent expects Number,
+Child can accept ANY Object → safe → LSP okay.
+
+❌ NOT Allowed (More specific input)
+Parent: void draw(Shape s)
+Child: void draw(Circle s)   // more specific → not allowed
+
+Reason:
+Parent jaha bhi use ho raha hai, waha koi bhi Shape pass ho sakta hai.
+But child sirf Circle lega → code break → LSP violation.
+
+⭐ Rule Summary
+✔ Child arguments same or more general
+❌ Child arguments narrower/specific → prohibited

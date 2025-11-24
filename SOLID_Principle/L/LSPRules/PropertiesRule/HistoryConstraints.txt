@@ -1,0 +1,28 @@
+🟧 2) History Constraint (Object History Cannot Be Broken)
+History Constraint = ek object apni “history/nature” ko mid-way me change nahi kar sakta.
+
+➡️ Object ko unn cheezon me mutate nahi karna chahiye jisse uski “identity/meaning” change ho jaye.
+
+Iska simple matlab:
+📌 Child class new behavior add kare → allowed
+📌 Child class object ka past behavior change kare → NOT allowed
+
+⭐ Examples:
+✔ Example: Immutable Classes
+
+String ka ek history constraint hota hai:
+once created → cannot change
+every operation returns a new string
+Agar koi child class String ko extend karke mutable bana de, to:
+
+➡️ Parent ka expected behavior break ho jayega
+➡️ History constraint violate ho jayega
+➡️ LSP break
+
+
+✔ BankAccount History Constraint
+Account type (Savings/Current) mid-way me change nahi ho sakta.
+History constraint:
+accountType remains same throughout object's lifetime.
+
+Agar child class mid-way me type change kar de, to illegal.

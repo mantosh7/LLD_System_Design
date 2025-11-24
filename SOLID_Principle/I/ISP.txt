@@ -1,0 +1,65 @@
+🟦 Interface Segregation Principle (ISP) — Simple Definition
+
+👉 Clients should NOT be forced to depend on methods they don’t use.
+
+Yani:
+Badi, fat interface → Galat
+Chhoti, focused, purpose-based interfaces → Sahi
+
+🟩 Ye Kyu Important Hai?
+
+Agar interface me bahut saare methods honge:
+Har class ko unwanted methods implement karna padega
+Blank implementations likhne padenge
+Maintenance mushkil ho jaati hai
+Behavior inconsistent ho jata hai
+
+Isiliye ISP kehta hai:
+👉 Interface ko small parts me break karo — har ek ka ek hi responsibility.
+
+🟧 Problem — Fat Interface
+Example:
+interface Worker {
+    void work();
+    void eat();
+    void sleep();
+}
+
+Ab do classes hain:
+class HumanWorker implements Worker {
+    work() {…}
+    eat() {…}
+    sleep() {…}
+}
+
+But…
+class RobotWorker implements Worker {
+    work() {…}
+    eat() { }     // Robots don't eat → useless
+    sleep() { }   // Robots don't sleep → useless
+}
+Robot ko unnecessary methods implement karne pad rahe → ISP violated.
+
+
+🟩 ISP Solution — Split Interfaces
+Split big interface into separate roles:
+
+interface Workable {
+    void work();
+}
+
+interface Eatable {
+    void eat();
+}
+
+interface Sleepable {
+    void sleep();
+}
+
+Now classes implement only what they need:
+
+✔ Human: 
+class HumanWorker implements Workable, Eatable, Sleepable { … }
+
+✔ Robot:
+class RobotWorker implements Workable { … }

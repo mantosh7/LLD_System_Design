@@ -1,0 +1,87 @@
+🟥 DIP ek hi baat bolta hai:
+
+👉 Bade important class (High-level) ko chhoti details wali class (Low-level) par depend NAAHI karna chahiye.
+👉 Dono ko Interface (Rule) par depend karna chahiye.
+
+🟦 Chalo REAL-LIFE example se samjhte hain (Bahut simple)
+⭐ Example: Mobile Charger
+
+Agar mobile aisa hota ki: Mobile only works with Samsung charger.
+To problem:
+=> Charger badla → mobile nahi chalega
+=> New type ka charger aya → mobile useless
+=> Hard dependency
+
+✔ DIP kya karta?
+Mobile bolta:
+Mujhe farak nahi padta kaunsa charger hai.
+Bas USB Type-C port follow kare.
+
+→ Ye Type-C interface hai.
+→ Charger koi bhi ho (Samsung, Apple, Boat, MI) → kaam karega.
+
+Mobile = High-level module
+Charger = Low-level module
+USB-C (port) = Interface / Abstraction
+
+🎯 High-level (mobile) depends on interface, not the charger.
+
+
+🟧 Ab same cheez software me dekho:
+
+🟥 ❌ BAD CODE (DIP break hota hai)
+class NotificationService {
+    EmailService email = new EmailService();
+    
+    void sendMsg() {
+        email.sendEmail();
+    }
+}
+Yaha high-level class NotificationService
+directly depend kar raha hai low-level class EmailService par.
+
+❌ Problem
+=> Kal ko SMS chahiye → code change
+=> WhatsApp chahiye → code change
+=> Slack chahiye → code change
+=> Testing mushkil
+=> System rigid ban gaya
+
+🟩 ✔ GOOD CODE (DIP follow hota hai)
+1) Pehle ek RULE (interface) banate hain:
+interface Notifier {
+    void send();
+}
+
+2) Ab LOW-LEVEL classes is Rule ko follow karengi:
+class EmailService implements Notifier {
+    public void send() { System.out.println("Email sent"); }
+}
+
+class SMSService implements Notifier {
+    public void send() { System.out.println("SMS sent"); }
+}
+
+3) Ab HIGH-LEVEL class interface par depend karegi, na ki direct Email par:
+class NotificationService {
+    Notifier notifier;
+    
+    NotificationService(Notifier n) {
+        this.notifier = n;
+    }
+
+    void sendMsg() {
+        notifier.send();
+    }
+}
+
+4) Use:
+NotificationService service1 = new NotificationService(new EmailService());
+service1.sendMsg();   // Email
+
+NotificationService service2 = new NotificationService(new SMSService());
+service2.sendMsg();   // SMS
+
+🟦 DIP KO EK LINE ME YAAD RAKHO:
+👉 Kode ka important part kahein bhi “new” low-level class ka naam direct nahi likhega.
+👉 Wo sirf interface ka naam use karega.

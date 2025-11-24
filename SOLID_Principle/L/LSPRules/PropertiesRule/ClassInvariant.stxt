@@ -1,0 +1,34 @@
+🟦 Class Invariant (Always-True Condition for the Object)
+
+Class Invariant = woh condition jo object ke life-time me hamesha true rehni chahiye.
+
+➡️ Object jab create hota hai, invariant true
+➡️ Object jab methods call hote hain, invariant true
+➡️ Object jab method complete kar leta hai, invariant fir se true
+
+Invariant = “Rule that must always hold”
+
+⭐ Simple Examples:
+✔ BankAccount class
+
+Invariant:
+balance ≥ 0
+Yeh object ke life-time me kabhi break nahi hona chahiye.
+
+class BankAccount {
+   double balance;     // invariant: balance >= 0
+}
+Withdraw() aur deposit() ke baad bhi ye invariant TRUE hona chahiye.
+
+
+❌ Square violating invariants
+
+Rectangle invariant:
+width independently change ho sakta hai  
+height independently change ho sakta hai  
+
+Square me:
+width == height always
+
+➡️ Invariant BREAK → LSP violation
+(isi liye Rectangle-Square inheritance galat hai)

@@ -1,0 +1,18 @@
+🟦 S – Single Responsibility Principle (SRP)
+👉 Ek class/ module ka sirf ek hi kaam hona chahiye.
+
+❌ Bad example:
+UserService
+user create kare
+user ka password reset kare
+email send kare
+logs maintain kare
+
+— Sab ek class me → messy, hard to maintain
+
+✅ Good example:
+UserManager → user data handle kare
+EmailService → emails send kare
+Logger → logs handle kare
+
+➡️ Har class ek reason ke liye change hogi.
